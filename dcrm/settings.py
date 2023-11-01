@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
+from django.contrib import messages
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -79,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'elderco',
         'USER': 'root',
-        'PASSWORD': 'victor',  #'79CCBF01C76112DCAA1192430380116A6DA1FCD6',
+        'PASSWORD': 'victor',
         'HOST': 'localhost',
         'PORT': '3306'
     }
@@ -126,3 +128,21 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',  # messages.INFO: '',
+    # ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+    #   MESSAGE_LEVEL
+    # ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+    # ----------------
+    # Level      Value
+    # ----------------
+    # DEBUG       10
+    # INFO        20
+    # SUCCESS     25
+    # WARNING     30
+    # ERROR       40    
+}
