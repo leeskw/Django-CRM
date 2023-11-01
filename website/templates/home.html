@@ -1,0 +1,97 @@
+{% extends "base.html" %} 
+{% block style %}
+<style>
+  /* css code reference
+  -----------------------------------------------------------------
+  https://www.youtube.com/watch?v=YGTNhLsF-_Q
+  How to create Responsive Table using HTML5,CSS3 and Bootstrap5 ?
+  =================================================================
+  Frontend Paathshala 
+
+  Github: https://github.com/Frontend-Paathshal...  
+  */
+
+  @media only screen and (max-width: 800px) {
+    #no-more-tables tbody,
+    #no-more-tables tr,
+    #no-more-tables td {
+      display: block;
+    }
+    #no-more-tables thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+
+    }
+     #no-more-tables td {
+      position: relative;
+      padding-left: 50%;
+      padding-left: 35%;
+      border: none;
+      border-bottom: 1px solid #eee;
+     }
+     #no-more-tables td::before {
+        content: attr(data-title);
+        position: absolute;
+        left: 6px;
+        font-weight: bold;
+        /* segments tweaked by me */
+        margin-left: -6px;
+        margin-top: -8px;
+        margin-bottom: -8px;
+        padding-top: 8px;
+        padding-left: 10px;
+        width: 30%;
+        height: 100%;
+        background-color: #385988;
+        color: #ffffff;
+     }
+    #no-more-tables tr {
+      /*border-bottom: 2px solid #CCC;*/
+      /* segments tweaked by me */
+      border: 5px solid #CCC;
+      margin-bottom: 1px;
+    }
+  }
+</style>
+
+{% endblock style %}
+
+{% block content %} 
+{% if user.is_authenticated %}
+<h1>Records...</h1>
+<div class="table-responsive-sm" id="no-more-tables">
+  <table class="table tablestriped table-hover table-responsive">
+    <thead>
+    <!-- <thead class="table-dark"> -->
+      <tr>
+        <th scope="col" style="background: #385988; color:#ffffff;">Name</th>
+        <th scope="col" style="background: #385988; color:#ffffff;">Email</th>
+        <th scope="col" style="background: #385988; color:#ffffff;">Phone</th>
+        <th scope="col" style="background: #385988; color:#ffffff;">Address</th>
+        <th scope="col" style="background: #385988; color:#ffffff;">City</th>
+        <th scope="col" style="background: #385988; color:#ffffff;">State</th>
+        <th scope="col" style="background: #385988; color:#ffffff;">Zipcode</th>
+        <th scope="col" style="background: #385988; color:#ffffff;">Created At</th>
+        <th scope="col" style="background: #385988; color:#ffffff;">ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if records %} {% for record in records %}
+      <tr>
+        <td data-title="Name">{{ record.first_name }} {{ record.last_name }}</td>
+        <td data-title="Email">{{ record.email }}</td>
+        <td data-title="Phone">{{ record.phone }}</td>
+        <td data-title="Address">{{ record.address }}</td>
+        <td data-title="City">{{ record.city }}</td>
+        <td data-title="State">{{ record.state }}</td>
+        <td data-title="Zipcode">{{ record.zipcode }}</td>
+        <td data-title="Created At">{{ record.created_at }}</td>
+        <td data-title="ID"><a href="{% url 'record' record.id %}">{{ record.id }}</a></td>
+        {% endfor %} {% endif %}
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endif %} 
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %} 
+
+{% block style %}
+<style>
+  .errorlist {
+    display: none;
+  }
+</style>
+{% endblock style %}
+
+{% block content %}
+<div class="col-md-6 offset-md-3">
+  <h1 class="text-center">Login</h1>
+  <br />
+  <div
+    class="formContainer" style="background-color: lightblue; padding: 20px; border-radius: 10px">
+    <form method="post">
+      {% csrf_token %}
+      {% if form.errors %}
+      <!-- Please enter a correct username and password. Note that both fields may be case-sensitive. -->
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        Your Form Has Errors:
+        <ul>
+          <li>
+            Please enter a correct username and password.<br> 
+            * Note that both fields may be case-sensitive.
+          </li>
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endif %} 
+      
+      {{ form.as_p }}
+      <!-- <div class="mb-3">
+            <input type="text" class="form-control" name="username" placeholder="Username" required>
+          </div>
+          <br>
+          <div class="mb-3">
+            <input type="password" class="form-control" name="password" placeholder="Password" required> 
+          </div> -->
+      <button type="submit" class="btn btn-secondary">Login</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  let form_container = document.querySelector('.formContainer');
+  let inputs = form_container.querySelectorAll('input');
+
+  for (let input of inputs) {
+    input.classList.add('form-control');
+  }
+</script>
+{% endblock content %}
